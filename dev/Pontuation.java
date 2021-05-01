@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 public class Pontuation {
     private LocalDateTime time;
     private int gamePoints;
-    private int level;
+    private int level; //change to class level
 
     /**
      *

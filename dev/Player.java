@@ -4,7 +4,7 @@
 import java.util.ArrayList;
 public class Player{
     private String username;
-    private ArrayList<Pontuation> gamePontuation;
+    private ArrayList<Pontuation> gamePontuation; //change to HashMap (level, pontuation)
     private int maxPontuation;
     /**
      *
@@ -14,7 +14,7 @@ public class Player{
      */
     public Player (String name){
         username = name;
-        gamePontuation = new ArrayList<>();
+        gamePontuation = new ArrayList<>(); //change to HashMap (level, pontuation)
         maxPontuation = 0;
     }
 
