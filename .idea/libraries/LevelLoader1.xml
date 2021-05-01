@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LevelLoader1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/contents/SampleLoadLevels/LevelLoader.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
