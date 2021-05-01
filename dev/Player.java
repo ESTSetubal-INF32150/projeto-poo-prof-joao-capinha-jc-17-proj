@@ -44,7 +44,7 @@ public class Player{
 
     /**
      *
-     * @param set the maximum pontuation for the player
+     * @param maxPontuation for the player
      */
     public void setMaxPontuation(int maxPontuation) {
         this.maxPontuation = maxPontuation;
@@ -62,7 +62,7 @@ public class Player{
 
     /**
      *
-     * @param pontuations
+     * @param pontuations A pontuation Array
      * @return sum of every punction that the player made
      */
     public int pontuationSum(ArrayList<Pontuation> pontuations){
