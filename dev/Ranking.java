@@ -10,10 +10,17 @@ public class Ranking {
     private static Ranking single_instance = null;
     private ArrayList<Player> ranking;
 
+    /**
+     * Singleton constructor with an array with every player info
+     */
     private Ranking(){
         ranking = new ArrayList<>();
     }
 
+    /**
+     * Code to inicialize the singleton constructor
+     * @return
+     */
     public static Ranking getInstance()
     {
         if (single_instance == null)
@@ -22,6 +29,10 @@ public class Ranking {
         return single_instance;
     }
 
+    /**
+     *
+     * Order the player ranking by the amount of pontuation they got
+     */
     public void orderByUserMax(ArrayList<Player> ranking){
         Player temp;
         int i, j = 0;
@@ -35,6 +46,10 @@ public class Ranking {
                 }
     }
 
+    /**
+     *
+     * @return Printes the game ranking
+     */
     @Override
         public String toString(){
             orderByUserMax(ranking);

@@ -73,6 +73,10 @@ public class Player{
         return sum;
     }
 
+    /**
+     *
+     * @return print the player, pontuation and time of that pontuation
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
