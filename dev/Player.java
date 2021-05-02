@@ -4,7 +4,7 @@
 import java.util.ArrayList;
 public class Player{
     private String username;
-    private ArrayList<Pontuation> gamePontuation; //change to HashMap (level, pontuation)
+    private ArrayList<Pontuation> gamePontuation;
     private int maxPontuation;
     /**
      *
@@ -14,7 +14,7 @@ public class Player{
      */
     public Player (String name){
         username = name;
-        gamePontuation = new ArrayList<>(); //change to HashMap (level, pontuation)
+        gamePontuation = new ArrayList<>();
         maxPontuation = 0;
     }
 
@@ -52,11 +52,10 @@ public class Player{
 
     /**
      *
-     * @param gamePoints points earned
-     * @param level     level played
+     * @param pontuation from a new game to add to the user
      */
-    public void addGamePontuation(int gamePoints, int level) {
-        gamePontuation.add(pontuation(gamePoints,level));
+    public void addGamePontuation(Pontuation pontuation) {
+        this.gamePontuation.add(pontuation);
         maxPontuation = pontuationSum(gamePontuation);
     }
 
