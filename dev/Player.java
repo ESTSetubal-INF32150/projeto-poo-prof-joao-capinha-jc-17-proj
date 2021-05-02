@@ -1,10 +1,10 @@
 /*
  * Possibilidade de arrayList com as Pontuações do Player
  */
-import java.util.ArrayList;
+import java.util.HashMap;
 public class Player{
     private String username;
-    private ArrayList<Pontuation> gamePontuation;
+    private HashMap<Integer, Pontuation > gamePontuation;
     private int maxPontuation;
     /**
      *
@@ -14,7 +14,7 @@ public class Player{
      */
     public Player (String name){
         username = name;
-        gamePontuation = new ArrayList<>();
+        gamePontuation = new HashMap<Integer, Pontuation>();
         maxPontuation = 0;
     }
 
@@ -55,8 +55,14 @@ public class Player{
      * @param pontuation from a new game to add to the user
      */
     public void addGamePontuation(Pontuation pontuation) {
-        this.gamePontuation.add(pontuation);
-        maxPontuation = pontuationSum(gamePontuation);
+        if(gamePontuation.containsKey(pontuation.getLevel())){
+            this.gamePontuation.replace(pontuation.getLevel(),pontuation);
+            maxPontuation = pontuationSum(gamePontuation);
+        }else{
+            gamePontuation.put(pontuation.getLevel(), pontuation);
+            maxPontuation = pontuationSum(gamePontuation);
+        }
+
     }
 
     /**
@@ -64,10 +70,10 @@ public class Player{
      * @param pontuations A pontuation Array
      * @return sum of every punction that the player made
      */
-    public int pontuationSum(ArrayList<Pontuation> pontuations){
+    public int pontuationSum(HashMap<Integer, Pontuation> pontuations){
         int sum = 0;
-        for (int i = 0; i<pontuations.size();i++){
-            sum += pontuations.get(i).getGamePoints();
+        for (Integer key: pontuations.keySet()) {
+            sum += pontuations.get(key).getGamePoints();
         }
         return sum;
     }
