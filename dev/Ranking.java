@@ -29,6 +29,10 @@ public class Ranking {
         return single_instance;
     }
 
+    public ArrayList<Player> getRanking() {
+        return ranking;
+    }
+
     /**
      *
      * Order the player ranking by the amount of pontuation they got
@@ -56,7 +60,7 @@ public class Ranking {
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i<ranking.size();i++) {
                 int temp = 0;
-                sb.append(String.format("Player Name: %s Pontuation: %f  \n", ranking.get(i).getUsername(), ranking.get(i).getMaxPontuation()));
+                sb.append(String.format("%fº Player Name: %s Pontuation: %f  \n",i  ranking.get(i).getUsername(), ranking.get(i).getMaxPontuation()));
             }
             return sb.toString();
         }
