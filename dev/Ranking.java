@@ -1,4 +1,4 @@
-/**
+ /**
  * ArrayList de players
  * Singleton Constructor
  *
@@ -60,7 +60,7 @@ public class Ranking {
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i<ranking.size();i++) {
                 int temp = 0;
-                sb.append(String.format("%fº Player Name: %s Pontuation: %f  \n",i  ranking.get(i).getUsername(), ranking.get(i).getMaxPontuation()));
+                sb.append(String.format("%dº Player Name: %s Pontuation: %f  \n", i, ranking.get(i).getUsername(), ranking.get(i).getMaxPontuation()));
             }
             return sb.toString();
         }

@@ -90,4 +90,22 @@ public class Player{
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if(obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        if(((Player)obj).getUsername().equals(this.getUsername())) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
