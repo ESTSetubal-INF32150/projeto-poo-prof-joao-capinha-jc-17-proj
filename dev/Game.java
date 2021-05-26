@@ -22,7 +22,7 @@ public class Game {
     public Game(Player user) {
         this.dificultyLevel = null;
         this.board = new Board();
-        LoadManager lm = new LoadManager("./contents/levels");
+        LoadManager lm = new LoadManager("./levels");
         this.levels = lm.getLevels();
         this.user = user;
         this.timeExpectancy = 0;

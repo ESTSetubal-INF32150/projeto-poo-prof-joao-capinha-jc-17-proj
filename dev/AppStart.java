@@ -1,3 +1,5 @@
+
+
 import java.util.Scanner;
 
 public class AppStart{
@@ -41,8 +43,10 @@ public class AppStart{
                         System.out.println("Nome já foi Registado");
                         break;
                     }
-                    ((rankings.getInstance()).getRanking()).add(temp);
-                    System.out.println("Player criado com Sucesso");
+                    else {
+                        ((rankings.getInstance()).getRanking()).add(temp);
+                        System.out.println("Player criado com Sucesso");
+                    }
                     break;
                 case 0: //Sair
                     return;
@@ -59,6 +63,31 @@ public class AppStart{
             switch (opc) {
                 case 1: //Começar Jogo (Menu Dificuldade)
                     gameStart = true;
+
+                    while(gameStart){
+                        menusManager.menuPlay();
+                        opc = sc.nextInt();
+                        Game game = new Game(playerPlaying);
+                        switch (opc) {
+                            case 1: //Jogo aleatório
+                                break;
+                            case 2: //Jogo Fácil
+                                game.startGame(DificultyLevel.FÁCIL);
+                                break;
+                            case 3: //Jogo Médio
+                                game.startGame(DificultyLevel.INTERMÉDIO);
+                                break;
+                            case 4: //Jogo Dificl
+                                game.startGame(DificultyLevel.DIFÍCIL);
+                                break;
+                            case 0: //Voltar para o menu Player
+                                gameStart = false;
+                                return;
+                            default:
+                                System.out.println("Valor introduzido inválido");
+                                break;
+                        }
+                    }
                     break;
                 case 2: //Continuar jogo
                     break;
@@ -74,31 +103,6 @@ public class AppStart{
                     break;
                 case 0: //Voltar para o Main Menu
                     break;
-                default:
-                    System.out.println("Valor introduzido inválido");
-                    break;
-            }
-        }
-
-        while(gameStart){
-            menusManager.menuPlay();
-            opc = sc.nextInt();
-            Game game = new Game(playerPlaying);
-            switch (opc) {
-                case 1: //Jogo aleatório
-                    break;
-                case 2: //Jogo Fácil
-                    game.startGame(DificultyLevel.FÁCIL);
-                    break;
-                case 3: //Jogo Médio
-                    game.startGame(DificultyLevel.INTERMÉDIO);
-                    break;
-                case 4: //Jogo Dificl
-                    game.startGame(DificultyLevel.DIFÍCIL);
-                    break;
-                case 0: //Voltar para o menu Player
-                    gameStart = false;
-                    return;
                 default:
                     System.out.println("Valor introduzido inválido");
                     break;

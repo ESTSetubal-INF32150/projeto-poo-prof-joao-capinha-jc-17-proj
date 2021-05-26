@@ -1,4 +1,5 @@
 
+
 import java.util.Scanner;
 
 public class Menus {
@@ -17,7 +18,7 @@ public class Menus {
         Scanner nameScanner = new Scanner(System.in);
         String name = nameScanner.nextLine();
         Player temp = new Player(name);
-        if((Ranking.getInstance().getRanking()).contains(temp.getUsername())){
+        if((Ranking.getInstance().getRanking()).contains(temp)){
             return temp;
         }else{
             System.out.println("O seu username não se encontra registado");
