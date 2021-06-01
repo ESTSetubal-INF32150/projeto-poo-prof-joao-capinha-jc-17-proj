@@ -77,10 +77,28 @@ public class Game {
         this.dificultyLevel = dificultyLevel;
         List<LevelInfo> levelsCapable = new ArrayList<>();
         int levelChosen = 0;
+        int diffChosen = 0;
         Random rnd = new Random();
         int numberRange = 0;
 
         switch(dificultyLevel) {
+            case ALEATÓRIO:
+                diffChosen = rnd.nextInt(3);
+
+                if(diffChosen == 1) {
+                    this.basePoints = 50;
+                    this.timeExpectancy = 30;
+                    levelsCapable = this.levels.stream().filter(x -> x.getBoard().length == 5).collect(Collectors.toList());
+                }
+                else if(diffChosen == 2) {
+                    this.basePoints = 100;
+                    this.timeExpectancy = 100;
+                    levelsCapable = this.levels.stream().filter(x -> x.getBoard().length == 7).collect(Collectors.toList());
+                }else {
+                    this.basePoints = 150;
+                    this.timeExpectancy = 150;
+                    levelsCapable = this.levels.stream().filter(x -> x.getBoard().length == 10).collect(Collectors.toList());
+                }
             case FÁCIL:
                 this.basePoints = 50;
                 this.timeExpectancy = 30;
@@ -101,6 +119,8 @@ public class Game {
         levelChosen = rnd.nextInt(levelsCapable.size());
 
         this.board.startGame(levelsCapable.get(levelChosen).getBoard());
+
+        this.board.printBoard();
     }
 
     public void endGame() {

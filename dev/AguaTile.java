@@ -38,6 +38,11 @@ public class AguaTile extends Tile {
         return "Água";
     }
 
+    @Override
+    public TileType getTileTypeExt() {
+        return TileType.ÁGUA;
+    }
+
     /**
      *
      * @return get the info about the tile

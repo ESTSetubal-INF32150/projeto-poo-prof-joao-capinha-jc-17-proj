@@ -1,4 +1,5 @@
 
+
 public class BarcoTile extends Tile {
     private int pointsToGive;
     private BoatSize boatSize;
@@ -61,6 +62,11 @@ public class BarcoTile extends Tile {
      */
     public String getBoatSizeDescription() {
         return this.boatSize.name();
+    }
+
+    @Override
+    public TileType getTileTypeExt() {
+        return TileType.BARCO;
     }
 
     /**

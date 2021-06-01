@@ -26,7 +26,7 @@ public class Board {
             for(int j = 0; j < board[i].length; j++) {
                 switch(board[i][j]) {
                     case '.':
-                        this.tiles.add(new AguaTile(j, i));
+                        this.tiles.add(new AguaTile(i, j));
                         break;
                     case 'B':
                         int qtd = 0;
@@ -72,24 +72,49 @@ public class Board {
                         }
 
                         if(qtd == 0) {
-                            this.tiles.add(new BarcoTile(j,i,BoatSize.PEQUENO));
+                            this.tiles.add(new BarcoTile(i,j,BoatSize.PEQUENO));
                         }
                         else if(qtd == 1) {
-                            this.tiles.add(new BarcoTile(j,i,BoatSize.MÉDIO));
+                            this.tiles.add(new BarcoTile(i,j,BoatSize.MÉDIO));
                         }
                         else {
-                            this.tiles.add(new BarcoTile(j,i,BoatSize.GRANDE));
+                            this.tiles.add(new BarcoTile(i,j,BoatSize.GRANDE));
                         }
                         break;
                     case 'P':
-                        this.tiles.add(new PortoTile(j,i));
+                        this.tiles.add(new PortoTile(i,j));
                         break;
                     default:
-                        this.tiles.add(new DesconhecidaTile(j,i));
+                        this.tiles.add(new DesconhecidaTile(i,j));
                         break;
                 }
             }
         }
+    }
+
+    public void printBoard() {
+        int line = this.tiles.get(0).getX();
+
+        for(Tile tile : this.tiles) {
+            if(line != tile.getX()) {
+                line = tile.getX();
+                System.out.println("");
+            }
+
+            switch(tile.getTileTypeExt()) {
+                case ÁGUA:
+                    System.out.print('.');
+                    break;
+                case PORTO:
+                    System.out.print('P');
+                    break;
+                case BARCO:
+                    System.out.print('B');
+                    break;
+            }
+        }
+
+        System.out.println("");
     }
 
     /**

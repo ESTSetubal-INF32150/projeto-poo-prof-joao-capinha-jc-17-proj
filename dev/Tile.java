@@ -70,6 +70,8 @@ public abstract class Tile {
      */
     public abstract String getTileType();
 
+    public abstract TileType getTileTypeExt();
+
     /**
      *
      * @return get the info about the tile

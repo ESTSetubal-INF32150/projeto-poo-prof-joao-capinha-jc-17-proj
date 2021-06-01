@@ -18,6 +18,11 @@ public class DesconhecidaTile extends Tile {
         return "Desconhecida";
     }
 
+    @Override
+    public TileType getTileTypeExt() {
+        return TileType.DESCONHECIDA;
+    }
+
     /**
      *
      * @return get the info about the tile

@@ -1,5 +1,4 @@
 
-
 public class PortoTile extends Tile {
     /**
      *
@@ -17,6 +16,11 @@ public class PortoTile extends Tile {
     @Override
     public String getTileType() {
         return "Porto";
+    }
+
+    @Override
+    public TileType getTileTypeExt() {
+        return TileType.PORTO;
     }
 
     /**

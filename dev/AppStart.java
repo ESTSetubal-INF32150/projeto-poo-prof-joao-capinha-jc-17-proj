@@ -1,5 +1,4 @@
 
-
 import java.util.Scanner;
 
 public class AppStart{
@@ -64,29 +63,34 @@ public class AppStart{
                 case 1: //Começar Jogo (Menu Dificuldade)
                     gameStart = true;
 
+                    menusManager.menuPlay();
+                    String casaEscolhida = "";
+                    opc = sc.nextInt();
+                    Game game = new Game(playerPlaying);
+                    switch (opc) {
+                        case 1: //Jogo aleatório
+                            game.startGame(DificultyLevel.ALEATÓRIO);
+                            break;
+                        case 2: //Jogo Fácil
+                            game.startGame(DificultyLevel.FÁCIL);
+                            break;
+                        case 3: //Jogo Médio
+                            game.startGame(DificultyLevel.INTERMÉDIO);
+                            break;
+                        case 4: //Jogo Dificl
+                            game.startGame(DificultyLevel.DIFÍCIL);
+                            break;
+                        case 0: //Voltar para o menu Player
+                            gameStart = false;
+                            return;
+                        default:
+                            System.out.println("Valor introduzido inválido");
+                            break;
+                    }
+
                     while(gameStart){
-                        menusManager.menuPlay();
-                        opc = sc.nextInt();
-                        Game game = new Game(playerPlaying);
-                        switch (opc) {
-                            case 1: //Jogo aleatório
-                                break;
-                            case 2: //Jogo Fácil
-                                game.startGame(DificultyLevel.FÁCIL);
-                                break;
-                            case 3: //Jogo Médio
-                                game.startGame(DificultyLevel.INTERMÉDIO);
-                                break;
-                            case 4: //Jogo Dificl
-                                game.startGame(DificultyLevel.DIFÍCIL);
-                                break;
-                            case 0: //Voltar para o menu Player
-                                gameStart = false;
-                                return;
-                            default:
-                                System.out.println("Valor introduzido inválido");
-                                break;
-                        }
+                        System.out.print("Coordenadas da casa: ");
+                        casaEscolhida = sc.nextLine();
                     }
                     break;
                 case 2: //Continuar jogo
