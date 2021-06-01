@@ -123,6 +123,15 @@ public class Game {
         this.board.printBoard();
     }
 
+    public void toggleTile(int x, int y) {
+        this.board.toggleTile(x, y);
+        this.board.printBoard();
+    }
+
+    public boolean validateBoard() {
+        return this.board.validateBoard();
+    }
+
     public void endGame() {
         this.dificultyLevel = null;
         this.board = new Board();

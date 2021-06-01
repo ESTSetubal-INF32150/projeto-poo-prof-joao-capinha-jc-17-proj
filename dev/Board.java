@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
     private List<Tile> tiles;
@@ -84,9 +85,6 @@ public class Board {
                     case 'P':
                         this.tiles.add(new PortoTile(i,j));
                         break;
-                    default:
-                        this.tiles.add(new DesconhecidaTile(i,j));
-                        break;
                 }
             }
         }
@@ -101,9 +99,9 @@ public class Board {
                 System.out.println("");
             }
 
-            switch(tile.getTileTypeExt()) {
+            switch(tile.getCurrentType()) {
                 case ÁGUA:
-                    System.out.print('.');
+                    System.out.print('A');
                     break;
                 case PORTO:
                     System.out.print('P');
@@ -111,6 +109,8 @@ public class Board {
                 case BARCO:
                     System.out.print('B');
                     break;
+                case DESCONHECIDA:
+                    System.out.print('.');
             }
         }
 
@@ -192,6 +192,24 @@ public class Board {
         }
 
         return count;
+    }
+
+    public void toggleTile(int x, int y) {
+        if(this.tiles.stream().anyMatch(k -> k.getX() == x && k.getY() == y)) {
+            Tile tile = this.tiles.stream().filter(k -> k.getX() == x && k.getY() == y).findFirst().get();
+            tile.toogleType();
+        }
+    }
+
+    public boolean validateBoard() {
+        List<Tile> portoTiles = this.tiles.stream().filter(x -> x.getTileTypeExt() == TileType.PORTO).collect(Collectors.toList());
+
+        for(Tile tile : portoTiles) {
+            int x = tile.getX();
+            int y = tile.getY();
+        }
+
+        return true;
     }
 
     /**

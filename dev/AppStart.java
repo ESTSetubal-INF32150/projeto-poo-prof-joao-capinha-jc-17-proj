@@ -1,9 +1,9 @@
 
+
 import java.util.Scanner;
 
 public class AppStart{
-	
-    private Game gameManager;
+
     private static Menus menusManager;
     private static Ranking rankings;
 
@@ -88,9 +88,34 @@ public class AppStart{
                             break;
                     }
 
+                    sc = new Scanner(System.in);
                     while(gameStart){
-                        System.out.print("Coordenadas da casa: ");
+                        System.out.print("Indique a próxima jogada (Horizontal, Vertical): ");
                         casaEscolhida = sc.nextLine();
+
+                        if(casaEscolhida.equals("CANCEL")) {
+                            game.endGame();
+                            gameStart = false;
+                        }
+                        else if(casaEscolhida.equals("SAVE")) {
+                            //guardar o jogo para o ficheiro
+                        }
+                        else if(casaEscolhida.equals("VALIDATE")) {
+                            boolean canValidate = game.validateBoard();
+
+                            if(canValidate) {
+                                //qualquer coisa a ver
+                            }
+                            else {
+                                System.out.println("Ainda não atracaste um barco pelo menos em todos os portos!");
+                            }
+                        }
+                        else {
+                            int x = Character.getNumericValue(casaEscolhida.charAt(0));
+                            int y = Character.getNumericValue(casaEscolhida.charAt(2));
+
+                            game.toggleTile(x, y);
+                        }
                     }
                     break;
                 case 2: //Continuar jogo
@@ -106,6 +131,7 @@ public class AppStart{
                     playerLoggedIn = false;
                     break;
                 case 0: //Voltar para o Main Menu
+                    playerLoggedIn = false;
                     break;
                 default:
                     System.out.println("Valor introduzido inválido");

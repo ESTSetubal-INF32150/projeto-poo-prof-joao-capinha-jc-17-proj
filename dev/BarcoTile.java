@@ -1,8 +1,9 @@
 
-
 public class BarcoTile extends Tile {
     private int pointsToGive;
     private BoatSize boatSize;
+    private TileType currentType;
+    private TileType actualType;
 
     /**
      *
@@ -14,6 +15,8 @@ public class BarcoTile extends Tile {
         super(x, y);
 
         this.boatSize = boatSize;
+        this.actualType = TileType.BARCO;
+        this.currentType = TileType.DESCONHECIDA;
 
         switch (boatSize) {
             case PEQUENO:
@@ -66,7 +69,7 @@ public class BarcoTile extends Tile {
 
     @Override
     public TileType getTileTypeExt() {
-        return TileType.BARCO;
+        return this.actualType;
     }
 
     /**
@@ -76,6 +79,35 @@ public class BarcoTile extends Tile {
     @Override
     public String getTileType() {
         return "Barco";
+    }
+
+    @Override
+    public boolean correctType() {
+        if(this.actualType == this.currentType) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public void toogleType() {
+        switch (this.currentType) {
+            case DESCONHECIDA:
+                this.currentType = TileType.ÁGUA;
+                break;
+            case ÁGUA:
+                this.currentType = TileType.BARCO;
+                break;
+            case BARCO:
+                this.currentType = TileType.DESCONHECIDA;
+        }
+    }
+
+    @Override
+    public TileType getCurrentType() {
+        return this.currentType;
     }
 
     /**

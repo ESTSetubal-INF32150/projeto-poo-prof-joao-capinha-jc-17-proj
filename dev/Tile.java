@@ -72,6 +72,12 @@ public abstract class Tile {
 
     public abstract TileType getTileTypeExt();
 
+    public abstract boolean correctType();
+
+    public abstract void toogleType();
+
+    public abstract TileType getCurrentType();
+
     /**
      *
      * @return get the info about the tile

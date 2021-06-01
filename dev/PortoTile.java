@@ -1,5 +1,9 @@
 
+
 public class PortoTile extends Tile {
+    private TileType actualType;
+    private TileType currentType;
+
     /**
      *
      * @param x position of the tile in the x axis of the matrix
@@ -7,6 +11,9 @@ public class PortoTile extends Tile {
      */
     public PortoTile(int x, int y) {
         super(x, y);
+
+        this.actualType = TileType.PORTO;
+        this.currentType = TileType.PORTO;
     }
 
     /**
@@ -20,7 +27,27 @@ public class PortoTile extends Tile {
 
     @Override
     public TileType getTileTypeExt() {
-        return TileType.PORTO;
+        return this.actualType;
+    }
+
+    @Override
+    public boolean correctType() {
+        if(this.actualType == this.currentType) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public void toogleType() {
+        return;
+    }
+
+    @Override
+    public TileType getCurrentType() {
+        return this.currentType;
     }
 
     /**
