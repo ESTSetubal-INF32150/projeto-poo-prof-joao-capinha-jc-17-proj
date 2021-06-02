@@ -1,5 +1,4 @@
 
-
 public class AguaTile extends Tile {
     private int pointsToGive;
     private TileType actualType;

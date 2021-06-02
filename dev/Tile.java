@@ -1,5 +1,4 @@
 
-
 public abstract class Tile {
     private int x;
     private int y;

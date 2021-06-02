@@ -1,5 +1,4 @@
 
-
 public class PortoTile extends Tile {
     private TileType actualType;
     private TileType currentType;

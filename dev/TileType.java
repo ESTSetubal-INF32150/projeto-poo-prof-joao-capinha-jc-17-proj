@@ -1,5 +1,4 @@
 
-
 public enum TileType {
     DESCONHECIDA,
     PORTO,

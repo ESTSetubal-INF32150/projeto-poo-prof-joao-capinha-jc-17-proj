@@ -1,5 +1,4 @@
 
-
 import java.util.Scanner;
 
 public class AppStart{
@@ -104,7 +103,7 @@ public class AppStart{
                             boolean canValidate = game.validateBoard();
 
                             if(canValidate) {
-                                //qualquer coisa a ver
+                                System.out.println("Deu certo familia!");
                             }
                             else {
                                 System.out.println("Ainda não atracaste um barco pelo menos em todos os portos!");

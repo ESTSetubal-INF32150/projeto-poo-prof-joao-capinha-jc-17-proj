@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class Board {
     private List<Tile> tiles;
+    private int height;
+    private int width;
 
     public Board() {
         this.tiles = new ArrayList<>();
@@ -27,7 +29,7 @@ public class Board {
             for(int j = 0; j < board[i].length; j++) {
                 switch(board[i][j]) {
                     case '.':
-                        this.tiles.add(new AguaTile(i, j));
+                        this.tiles.add(new AguaTile(j, i));
                         break;
                     case 'B':
                         int qtd = 0;
@@ -73,31 +75,32 @@ public class Board {
                         }
 
                         if(qtd == 0) {
-                            this.tiles.add(new BarcoTile(i,j,BoatSize.PEQUENO));
+                            this.tiles.add(new BarcoTile(j,i,BoatSize.PEQUENO));
                         }
                         else if(qtd == 1) {
-                            this.tiles.add(new BarcoTile(i,j,BoatSize.MÉDIO));
+                            this.tiles.add(new BarcoTile(j,i,BoatSize.MÉDIO));
                         }
                         else {
-                            this.tiles.add(new BarcoTile(i,j,BoatSize.GRANDE));
+                            this.tiles.add(new BarcoTile(j,i,BoatSize.GRANDE));
                         }
                         break;
                     case 'P':
-                        this.tiles.add(new PortoTile(i,j));
+                        this.tiles.add(new PortoTile(j,i));
                         break;
                 }
             }
         }
+
+        this.width = board.length;
+        this.height = board[0].length;
     }
 
     public void printBoard() {
-        int line = this.tiles.get(0).getX();
+        int line = 0;
 
         for(Tile tile : this.tiles) {
-            if(line != tile.getX()) {
-                line = tile.getX();
-                System.out.println("");
-            }
+
+            line = tile.getX();
 
             switch(tile.getCurrentType()) {
                 case ÁGUA:
@@ -111,6 +114,10 @@ public class Board {
                     break;
                 case DESCONHECIDA:
                     System.out.print('.');
+            }
+
+            if(line == this.width - 1) {
+                System.out.println("");
             }
         }
 
@@ -207,6 +214,158 @@ public class Board {
         for(Tile tile : portoTiles) {
             int x = tile.getX();
             int y = tile.getY();
+
+            int numOfBoats = 0;
+
+            if(y == this.height - 1) {
+                for(int i = y; i >= 0; i--) {
+                    int temp = i;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
+            else if(y == 0) {
+                for(int i = y; i < this.height; i++) {
+                    int temp = i;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
+            else {
+                for(int i = y; i >= 0; i--) {
+                    int temp = i;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+
+                numOfBoats = 0;
+
+                for(int i = y; i < this.height; i++) {
+                    int temp = i;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == x && k.getY() == temp).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
+
+            numOfBoats = 0;
+
+            if(x == this.width - 1) {
+                for(int j = x; j >= 0; j--) {
+                    int temp = j;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
+            else if(x == 0) {
+                for(int l = x; l < this.width; l++) {
+                    int temp = l;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
+            else {
+                for(int j = x; j >= 0; j--) {
+                    int temp = j;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+
+                numOfBoats = 0;
+
+                for(int l = x; l < this.width; l++) {
+                    int temp = l;
+
+                    if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.BARCO) {
+                        numOfBoats++;
+                    }
+                    else if(this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.ÁGUA ||
+                            this.tiles.stream().filter(k -> k.getX() == temp && k.getY() == y).findFirst().get().getCurrentType() == TileType.DESCONHECIDA){
+                        numOfBoats = 1;
+                        break;
+                    }
+                }
+
+                if(numOfBoats > 1 || numOfBoats == 0) {
+                    return false;
+                }
+            }
         }
 
         return true;
