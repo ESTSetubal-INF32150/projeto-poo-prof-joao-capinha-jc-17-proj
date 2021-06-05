@@ -167,9 +167,7 @@ public class Board {
                 System.out.println("");
                 numX++;
 
-                if(y < this.height-1) {
-                    printBoatsLine(y);
-                }
+                first = false;
             }
         }
 
