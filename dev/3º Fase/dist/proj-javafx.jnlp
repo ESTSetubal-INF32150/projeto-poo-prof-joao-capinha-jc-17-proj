@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="proj-javafx.jnlp">
+  <information>
+    <title>proj-javafx</title>
+    <vendor>tomasbota</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\LevelLoader.jar" size="7622" download="eager" />
+    <jar href="proj-javafx.jar" size="355098" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="proj.javafx.ProjJavafx"  name="proj-javafx" />
+  <update check="always"/>
+</jnlp>
