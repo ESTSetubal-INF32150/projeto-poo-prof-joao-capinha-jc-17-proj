@@ -42,7 +42,7 @@ public class MainMenu extends GridPane {
                 DifficultyInput diffInput = new DifficultyInput(false);
                     
                 stage.setTitle("B&D - Escolher Dificuldade");
-                stage.setScene(new Scene(diffInput, 1152, 960, Color.web("#1c466c", 1.0)));
+                stage.setScene(new Scene(diffInput, 1152, 1024, Color.web("#1c466c", 1.0)));
                 stage.show();
             }
         });
@@ -58,7 +58,7 @@ public class MainMenu extends GridPane {
                 Ranking.getInstance().setPlayerPlaying(null);
                 
                 stage.setTitle("Boats and Docks");
-                stage.setScene(new Scene(root, 1152, 960, Color.web("#1c466c", 1.0)));
+                stage.setScene(new Scene(root, 1152, 1024, Color.web("#1c466c", 1.0)));
                 stage.show();
             }
         });
@@ -72,7 +72,7 @@ public class MainMenu extends GridPane {
                 DifficultyInput diffInput = new DifficultyInput(true);
                     
                 stage.setTitle("B&D - Escolher Dificuldade");
-                stage.setScene(new Scene(diffInput, 1152, 960, Color.web("#1c466c", 1.0)));
+                stage.setScene(new Scene(diffInput, 1152, 1024, Color.web("#1c466c", 1.0)));
                 stage.show();
             }
         });

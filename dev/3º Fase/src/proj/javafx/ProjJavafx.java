@@ -26,7 +26,7 @@ public class ProjJavafx extends Application {
     public void start(Stage primaryStage) {
         LoginMenu root = new LoginMenu();
         primaryStage.setTitle("Boats and Docks");
-        primaryStage.setScene(new Scene(root, 1152, 960, Color.web("#1c466c", 1.0)));
+        primaryStage.setScene(new Scene(root, 1152, 1024, Color.web("#1c466c", 1.0)));
         primaryStage.show();
     }
     

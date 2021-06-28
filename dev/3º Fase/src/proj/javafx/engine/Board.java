@@ -228,6 +228,31 @@ public class Board {
             numBoats = 0;
         }
     }
+    
+        /**
+     * Print the number of boats in the columns
+     */
+    public ArrayList<Integer> getBoatsColumns() {
+        int numBoats = 0;
+        ArrayList<Integer> boats = new ArrayList<>();
+        
+        for(int i = 0; i < this.width; i++) {
+            int x = i;
+            for(int j = 0; j < this.height; j++) {
+                int y = j;
+
+                if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == y).findFirst().get().getTileTypeExt() == TileType.BARCO) {
+                    numBoats++;
+                }
+            }
+
+            boats.add(numBoats);
+            
+            numBoats = 0;
+        }
+        
+        return boats;
+    }
 
     /**
      *
@@ -245,6 +270,24 @@ public class Board {
         }
 
         System.out.print(numBoats + "|");
+    }
+    
+        /**
+     *
+     * @param y The current line where the printer is positioned
+     */
+    public int getBoatsLine(int y) {
+        int numBoats = 0;
+
+        for(int j = 0; j < this.width; j++) {
+            int x = j;
+
+            if(this.tiles.stream().filter(k -> k.getX() == x && k.getY() == y).findFirst().get().getTileTypeExt() == TileType.BARCO) {
+                numBoats++;
+            }
+        }
+
+        return numBoats;
     }
 
     /**

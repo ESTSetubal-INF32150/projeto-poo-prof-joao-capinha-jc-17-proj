@@ -5,6 +5,8 @@
  */
 package proj.javafx;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import static javafx.scene.layout.GridPane.getRowIndex;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -50,7 +53,8 @@ public class BoardPane extends GridPane{
     private boolean timerStoped;
     
     public BoardPane(String diff) {
-        int i = 0, j = 0;
+        int i = 0, j = 0, k = 0;
+        ArrayList<Integer> boats;
         
         this.game = new Game(Ranking.getInstance().getPlayerPlaying());
         this.validate = new Button("Validar");
@@ -88,7 +92,46 @@ public class BoardPane extends GridPane{
             this.game.startGame(DificultyLevel.DIFÍCIL);
         }
         
-        for(i = 0; i < this.game.getBoard().getHeight(); i++) {
+        boats = this.game.getBoard().getBoatsColumns();
+        
+        for(Integer boat : boats) {
+            StackPane stackPane;
+            Rectangle boatRect = new Rectangle(45, 45);
+            Text num = new Text(String.valueOf(boat));
+            
+            num.setFont(new Font(24));
+            
+            boatRect.setFill(Color.GREEN);
+            boatRect.setStroke(Color.BLACK);
+            
+            stackPane = new StackPane(boatRect, num);
+            
+            add(stackPane, k+1, 0);
+            
+            k++;
+        }
+        
+        StackPane boatsLinePane;
+        StackPane boatsColumnPane;
+        Rectangle boatRectLine;
+        Rectangle boatRectColumn;
+        Text num;  
+        Text num2;
+        
+        for(i = 0; i < this.game.getBoard().getHeight(); i++) {        
+            boatRectColumn = new Rectangle(45, 45);
+            
+            num2 = new Text(String.valueOf(this.game.getBoard().getBoatsLine(i)));
+            
+            num2.setFont(new Font(24));
+            
+            boatRectColumn.setFill(Color.GREEN);
+            boatRectColumn.setStroke(Color.BLACK);
+            
+            boatsColumnPane = new StackPane(boatRectColumn, num2);
+            
+            add(boatsColumnPane, 0, i+2);
+            
             for(j = 0; j < this.game.getBoard().getWidth(); j++) {
                 String typeTile = this.game.getBoard().getTile(i, j).getCurrentType().toString();
                 Rectangle tile = new Rectangle(90, 90);
@@ -97,7 +140,7 @@ public class BoardPane extends GridPane{
                 
                 tile.setFill(Color.BURLYWOOD);
                 tile.setStroke(Color.BLACK);
-
+                
                 if(typeTile.equals("DESCONHECIDA")) {
                     image = new Image("File:../../src/proj/javafx/image/question.png", 48, 48, false, false);
                 }
@@ -113,14 +156,14 @@ public class BoardPane extends GridPane{
                 
                 stackPane = new StackPane(tile, new ImageView(image));
                 
-                add(stackPane, i, j);
+                add(stackPane, i+1, j+2);
 
                 stackPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                     @Override
                     public void handle(MouseEvent event) {
-                        double x = getColumnIndex(stackPane);
-                        double y = getRowIndex(stackPane);
+                        double x = getColumnIndex(stackPane) - 1;
+                        double y = getRowIndex(stackPane) - 2;
 
                         String type;
                         String currentType = game.getBoard().getTile((int)x, (int)y).getCurrentType().toString();
@@ -163,6 +206,33 @@ public class BoardPane extends GridPane{
                     }
                 });
             }
+            
+            boatRectLine = new Rectangle(45, 45);
+            num = new Text(String.valueOf(this.game.getBoard().getHeight() - (i + 1)));
+            
+            num.setFont(new Font(24));
+            
+            boatRectLine.setFill(Color.GREEN);
+            boatRectLine.setStroke(Color.BLACK);
+            
+            boatsLinePane = new StackPane(boatRectLine, num);
+            
+            add(boatsLinePane, j + 1, i + 2);
+        }
+        
+        for(int l = 0; l < this.game.getBoard().getWidth(); l++) {
+            StackPane xPane;
+            Rectangle xAxis = new Rectangle(45, 45);
+            Text x = new Text(String.valueOf(l));
+            
+            x.setFont(new Font(24));
+            
+            xAxis.setFill(Color.GREEN);
+            xAxis.setStroke(Color.BLACK);
+            
+            xPane = new StackPane(xAxis, x);
+            
+            add(xPane, l+1, i+2);
         }
         
         /**
@@ -177,7 +247,7 @@ public class BoardPane extends GridPane{
                 timer.stop();
                 
                 stage.setTitle("Boats and Docks");
-                stage.setScene(new Scene(mainMenu, 1152, 960, Color.web("#1c466c", 1.0)));
+                stage.setScene(new Scene(mainMenu, 1152, 1024, Color.web("#1c466c", 1.0)));
                 stage.show();
             }
         });
@@ -265,16 +335,16 @@ public class BoardPane extends GridPane{
                     game.endGame();
 
                     stage.setTitle("Boats and Docks");
-                    stage.setScene(new Scene(mainMenu, 1152, 960, Color.web("#1c466c", 1.0)));
+                    stage.setScene(new Scene(mainMenu, 1152, 1024, Color.web("#1c466c", 1.0)));
                     stage.show();
                 }
             }
         });
         
-        add(this.validate, 0, j+1);
-        add(this.pause, i-2, j+1);
-        add(this.help, 1, j+1);
-        add(this.cancel, i-1, j+1);
+        add(this.validate, 1, j+3);
+        add(this.pause, i-1, j+3);
+        add(this.help, 2, j+3);
+        add(this.cancel, i, j+3);
         
         setAlignment(Pos.CENTER);
         
